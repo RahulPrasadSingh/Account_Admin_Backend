@@ -1,9 +1,16 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 
-// Ensure uploads folder exists
-const uploadDir = "/uploads"; // Directory to save uploaded images
+// To get __dirname in ES module (since you're likely using ESM)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Define a safe upload directory relative to your project
+const uploadDir = path.join(__dirname, "..", "uploads");
+
+// Ensure the uploads folder exists
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
